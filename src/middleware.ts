@@ -4,10 +4,6 @@ import type { NextRequest } from 'next/server'
 const AUTH_TOKEN = process.env.API_AUTH_TOKEN
 const PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
-type RouteConfig = {
-  [key: string]: 'public' | 'private'
-}
-
 type RouteAuthMap = {
   [path: string]: {
     [method: string]: 'public' | 'private'
@@ -16,18 +12,24 @@ type RouteAuthMap = {
 
 // Map routes to their required auth type
 const routeAuthMap: RouteAuthMap = {
-  '/api/users': {
-    POST: 'public' // Uses NEXT_PUBLIC_API_KEY
+  '/api/posts': {
+    GET: 'public',
+    POST: 'private',
   },
-  // Add other routes with their auth requirements
+  '/api/posts/search': {
+    GET: 'public',
+  },
+  '/api/waitlist': {
+    POST: 'public',
+    GET: 'private',
+  },
+  // Default - all other API routes require private token
   '/api': {
-    ALL: 'private' // Default - uses AUTH_TOKEN
+    ALL: 'private'
   }
 }
 
 export function middleware(request: NextRequest) {
-  console.log('Middleware executing for path:', request.nextUrl.pathname)
-
   const path = request.nextUrl.pathname
   const method = request.method
   
@@ -80,7 +82,6 @@ export function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// Configure which routes to apply the middleware to
 export const config = {
   matcher: '/api/:path*',
 }

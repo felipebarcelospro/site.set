@@ -8,7 +8,7 @@
     "email": "felipebarcelospro@gmail.com",
     "url": "https://github.com/felipebarcelospro"
   },
-  "homepage": "https://site.set",
+  "homepage": "https://site.set.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/felipebarcelospro/site.set.git"
@@ -54,6 +54,8 @@
     "dotenv": "^16.4.5",
     "lucide-react": "^0.462.0",
     "next": "15.0.3",
+    "next-actions": "^0.0.5",
+    "nextjs-toploader": "^3.7.15",
     "openai": "^4.73.1",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",

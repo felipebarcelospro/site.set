@@ -1,20 +1,20 @@
-# Deploy na Vercel
+# Deploy - Vercel
 
-Este guia explica como fazer deploy do Site.Set na Vercel, incluindo configuração do banco de dados e variáveis de ambiente.
+Guia para fazer deploy do Site.Set na Vercel.
 
-## Pré-requisitos
+## Requisitos
 
 1. Conta na [Vercel](https://vercel.com)
-2. Repositório do projeto no GitHub
-3. Conta no [Vercel Postgres](https://vercel.com/storage/postgres) ou outro provedor PostgreSQL
+2. Repositório no GitHub
+3. Banco PostgreSQL (Vercel ou outro)
 
-## Passo a Passo
+## Setup
 
-### 1. Preparação do Projeto
+### 1. Preparação
 
-1. Certifique-se de que seu projeto está no GitHub
-2. Verifique se o arquivo `vercel.json` está configurado:
-   \`\`\`json
+1. Verifique o repositório no GitHub
+2. Configure o `vercel.json`:
+   ```json
    {
      "version": 2,
      "buildCommand": "npx prisma generate && npm run build",
@@ -23,116 +23,116 @@ Este guia explica como fazer deploy do Site.Set na Vercel, incluindo configuraç
      "framework": "nextjs",
      "regions": ["gru1"]
    }
-   \`\`\`
+   ```
 
-### 2. Configuração do Banco de Dados
+### 2. Banco de Dados
 
-#### Usando Vercel Postgres
+#### Vercel Postgres
+1. Dashboard > Storage
+2. Criar banco Postgres
+3. Variáveis adicionadas automaticamente
 
-1. Na dashboard da Vercel, vá em "Storage"
-2. Crie um novo banco Postgres
-3. As variáveis de ambiente serão adicionadas automaticamente
+#### Outro Provedor
+1. Obtenha URL de conexão
+2. Adicione nas variáveis de ambiente
 
-#### Usando Outro Provedor
-
-1. Obtenha sua URL de conexão PostgreSQL
-2. Adicione-a nas variáveis de ambiente da Vercel
-
-### 3. Deploy na Vercel
+### 3. Deploy
 
 1. Acesse [vercel.com/new](https://vercel.com/new)
-2. Importe seu repositório do GitHub
-3. Configure o projeto:
-   - Framework Preset: Next.js
+2. Importe o repositório
+3. Configure:
+   - Framework: Next.js
    - Root Directory: ./
-   - Build Command: Deixe o padrão
+   - Build Command: (padrão)
 
-### 4. Variáveis de Ambiente
+### 4. Variáveis
 
-Configure as seguintes variáveis:
-
-\`\`\`bash
-# Database (se não usar Vercel Postgres)
+```bash
+# Database
 DATABASE_URL="sua-url-postgres"
 
 # API
-API_AUTH_TOKEN="token-seguro-gerado"
-NEXT_PUBLIC_API_KEY="chave-publica-gerada"
+API_AUTH_TOKEN="token-seguro"
+NEXT_PUBLIC_API_KEY="chave-publica"
 
 # OpenAI
-OPENAI_API_KEY="sua-chave-openai"
-\`\`\`
+OPENAI_API_KEY="sua-chave"
+```
 
-### 5. Configurações Adicionais
+## Configurações
 
-1. **Domínio Personalizado**
-   - Vá em "Settings > Domains"
-   - Adicione seu domínio
-   - Siga as instruções de DNS
+### Domínio
+1. Settings > Domains
+2. Adicione seu domínio
+3. Configure DNS
 
-2. **Analytics e Monitoramento**
-   - Ative o Vercel Analytics
-   - Configure Speed Insights
-   - Habilite logs de produção
+### Analytics
+1. Ative Vercel Analytics
+2. Configure Speed Insights
+3. Habilite logs
 
-3. **Proteção e Cache**
-   - Configure proteção DDoS
-   - Ajuste regras de cache
-   - Habilite Prerender se necessário
+### Proteção
+1. Configure DDoS
+2. Ajuste cache
+3. Ative Prerender
 
-## Verificações Pós-Deploy
+## Pós-Deploy
 
-1. **Banco de Dados**
-   ```bash
-   # Execute as migrações
-   npx prisma migrate deploy
-   ```
+### Database
+```bash
+npx prisma migrate deploy
+```
 
-2. **Funcionalidades**
-   - Teste o formulário de lista de espera
-   - Verifique o blog e busca
-   - Teste a API com Postman/Insomnia
+### Checklist
+- [ ] Form de waitlist
+- [ ] Blog e busca
+- [ ] API (Postman/Insomnia)
 
-3. **Performance**
-   - Verifique Web Vitals
-   - Teste tempo de carregamento
-   - Valide SEO e meta tags
+### Performance
+- [ ] Web Vitals
+- [ ] Loading time
+- [ ] SEO/meta tags
 
 ## Manutenção
 
-### Atualizações
-
-1. Push para main/master dispara deploy automático
-2. Preview deployments em PRs
-3. Rollback disponível se necessário
+### Updates
+1. Push para main = deploy
+2. Preview em PRs
+3. Rollback disponível
 
 ### Monitoramento
+1. Alertas de erro
+2. Métricas
+3. Uso do banco
 
-1. Configure alertas de erro
-2. Monitore métricas de performance
-3. Acompanhe uso do banco de dados
+## Problemas Comuns
 
-## Troubleshooting
+### Build
+```
+Erro: Build failed
+```
+- Verifique logs
+- Confirme vars
+- Valide deps
 
-### Problemas Comuns
+### Database
+```
+Erro: Connection failed
+```
+- Verifique string
+- Confirme IP
+- Teste migrations
 
-1. **Build Falhou**
-   - Verifique logs de build
-   - Confirme variáveis de ambiente
-   - Valide dependências
+### API
+```
+Erro: 500 Internal
+```
+- Verifique logs
+- Teste endpoints
+- Valide tokens
 
-2. **Erro de Conexão DB**
-   - Verifique string de conexão
-   - Confirme IP na whitelist
-   - Teste migrações localmente
+## Links
 
-3. **API 500**
-   - Verifique logs de runtime
-   - Teste endpoints localmente
-   - Valide tokens de autenticação
-
-## Recursos Adicionais
-
-- [Documentação Vercel](https://vercel.com/docs)
-- [Guia Prisma Deploy](https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-vercel)
-- [Next.js na Vercel](https://nextjs.org/docs/deployment) 
+- [Docs Vercel](https://vercel.com/docs)
+- [Prisma Deploy](https://www.prisma.io/docs/guides/deployment/deploying-to-vercel)
+- [Next.js Deploy](https://nextjs.org/docs/deployment) 

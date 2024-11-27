@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback } from 'react'
 import { useClipboard } from './use-clipboard'
 import { Linkedin, Facebook, Twitter, AtSign, Link2 } from 'lucide-react'

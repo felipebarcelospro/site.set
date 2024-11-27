@@ -7,7 +7,7 @@
     "contact": {
       "name": "Site.Set Team",
       "email": "dev@site.set",
-      "url": "https://site.set"
+      "url": "https://site.set.vercel.app"
     }
   },
   "servers": [

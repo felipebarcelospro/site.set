@@ -106,7 +106,7 @@ program
       console.log(`Título: ${post.title}`)
       console.log(`Slug: ${post.slug}`)
       console.log(`Palavras-chave: ${post.seoKeywords.join(', ')}`)
-      console.log(`\nURL: https://site.set/blog/${post.slug}`)
+      console.log(`\nURL: https://site.set.vercel.app/blog/${post.slug}`)
 
     } catch (error) {
       spinner.fail('Erro ao criar artigo')

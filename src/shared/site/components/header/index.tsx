@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import { cn } from '@/shared/utils/utils'
 import { Button } from '@/shared/design-system/button'
 
 export function Header() {
-  const router = useRouter()
+  const pathname = usePathname()
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -24,7 +24,7 @@ export function Header() {
               href="/"
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                router.pathname === "/" ? "text-blue-500" : "text-muted-foreground"
+                pathname === "/" ? "text-blue-500" : "text-muted-foreground"
               )}
             >
               Home
@@ -33,7 +33,7 @@ export function Header() {
               href="/blog"
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                router.pathname.startsWith("/blog") ? "text-blue-500" : "text-muted-foreground"
+                pathname.startsWith("/blog") ? "text-blue-500" : "text-muted-foreground"
               )}
             >
               Blog

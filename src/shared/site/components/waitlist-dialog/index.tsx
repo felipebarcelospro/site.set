@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Image from 'next/image'
+
+import { useState, useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -10,12 +11,10 @@ import { Button } from '@/shared/design-system/button'
 import { Input } from '@/shared/design-system/input'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/shared/design-system/form'
 import { Check } from 'lucide-react'
-
-const formSchema = z.object({
-  email: z.string().email('E-mail inválido'),
-})
-
-type FormValues = z.infer<typeof formSchema>
+import { subscribeToWaitlist } from './subscribe-to-waitlist'
+import { subscribeToWaitlistSchema } from './schema'
+  
+type FormValues = z.infer<typeof subscribeToWaitlistSchema>
 
 interface WaitlistDialogProps {
   children: React.ReactNode
@@ -23,53 +22,41 @@ interface WaitlistDialogProps {
 
 const testimonials = [
   { avatar: 'https://github.com/diego3g.png' },
-
   { avatar: 'https://github.com/jakeliny.png' },
   { avatar: 'https://github.com/felipebarcelospro.png' },
 ]
 
 export function WaitlistDialog({ children }: WaitlistDialogProps) {
   const [open, setOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isPending, startTransition] = useTransition()
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(subscribeToWaitlistSchema),
   })
 
-  // Verifica se o usuário já está inscrito
   useEffect(() => {
     const email = localStorage.getItem('@site.set:waitlist-email')
+
     if (email) {
       setIsSubscribed(true)
     }
   }, [])
 
   async function onSubmit(data: FormValues) {
-    try {
-      setIsLoading(true)
-      
-      const response = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
-        },
-        body: JSON.stringify(data),
-      })
+    setError(null)    
+    startTransition(async () => {
+      const result = await subscribeToWaitlist({ email: data.email })
 
-      if (!response.ok) {
-        throw new Error('Erro ao cadastrar e-mail')
+      if (result.error) {
+        setError(result.error)
+        return
       }
 
-      // Salva o email no localStorage
       localStorage.setItem('@site.set:waitlist-email', data.email)
       setIsSubscribed(true)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
-    }
+    })
   }
 
   return (
@@ -150,12 +137,16 @@ export function WaitlistDialog({ children }: WaitlistDialogProps) {
                     )}
                   />
 
+                  {error && (
+                    <p className="text-sm text-red-500 text-center">{error}</p>
+                  )}
+
                   <Button 
                     type="submit" 
                     className="w-full h-12" 
-                    disabled={isLoading}
+                    disabled={isPending}
                   >
-                    {isLoading ? 'Cadastrando...' : 'Entrar para lista'}
+                    {isPending ? 'Cadastrando...' : 'Entrar para lista'}
                   </Button>
                 </form>
               </Form>
@@ -186,4 +177,4 @@ export function WaitlistDialog({ children }: WaitlistDialogProps) {
       </DialogContent>
     </Dialog>
   )
-} 
+}

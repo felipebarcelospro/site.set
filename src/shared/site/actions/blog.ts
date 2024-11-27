@@ -10,8 +10,6 @@ export const searchPosts = actionSiteClient.action({
   type: 'query',
   schema: searchPostsSchema,
   handler: async ({ input }) => {
-    await delay(3000)
-
     try {
       const posts = await prisma.post.findMany({
         where: input.searchTerm ? {
@@ -53,9 +51,6 @@ export const getPostBySlug = actionSiteClient.action({
   type: 'query',
   schema: getPostBySlugSchema,
   handler: async ({ input }) => {
-    await delay(3000)
-
-
     try {
       const post = await prisma.post.findUnique({
         where: { slug: input.slug }

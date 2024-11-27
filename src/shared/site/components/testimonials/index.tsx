@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
 
 export function Testimonials() {
   return (
-    <section className="container py-24">
+    <section className="container pb-8 pt-8 md:py-10">
       <div className="flex flex-col items-center gap-12">
         <h2 className="text-balance text-center text-3xl font-bold">
           Quem utiliza, aprova!
@@ -42,7 +42,7 @@ export function Testimonials() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.author.name}
-              className="flex flex-col gap-6 rounded-lg bg-card border p-12"
+              className="flex flex-col gap-6 rounded-lg bg-card border p-6 md:p-12"
             >
               <p className="text-balance text-muted-foreground">
                 {testimonial.content}

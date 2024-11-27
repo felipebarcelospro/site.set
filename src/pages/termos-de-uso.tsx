@@ -33,7 +33,7 @@ export default function TermsOfUse() {
           </nav>
 
           {/* Terms of Use */}
-          <article className="prose prose-invert max-w-full bg-card rounded-lg p-12 border">
+          <article className="prose prose-invert max-w-full bg-card rounded-lg p-6 md:p-12 border">
             <h1>Termos de Uso</h1>
             
             <p className="lead">

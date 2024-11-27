@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
             </ol>
           </nav>
 
-          <article className="prose prose-invert max-w-full bg-card rounded-lg p-12 border">
+          <article className="prose prose-invert max-w-full bg-card rounded-lg p-6 md:p-12 border">
             <h1>Política de Privacidade</h1>
             
             <p className="lead">

@@ -2,7 +2,7 @@ import { Shield, Store, Headphones } from 'lucide-react'
 
 export function Benefits() {
   return (
-    <section className="container py-24">
+    <section className="container pb-8 pt-8 md:py-10">
       <div className="flex flex-col items-center gap-12">
         <h2 className="text-balance text-center text-3xl font-bold">
           Sua loja de afiliados, simples,
@@ -10,7 +10,7 @@ export function Benefits() {
         </h2>
 
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="flex flex-col text-left gap-2 rounded-lg bg-card border p-12">
+          <div className="flex flex-col text-left gap-2 rounded-lg bg-card border p-6 md:p-12">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 mb-4">
               <Shield className="h-6 w-6 text-blue-500" />
             </div>
@@ -21,7 +21,7 @@ export function Benefits() {
             </p>
           </div>
 
-          <div className="flex flex-col text-left gap-2 rounded-lg bg-card border p-12">
+          <div className="flex flex-col text-left gap-2 rounded-lg bg-card border p-6 md:p-12">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 mb-4">
               <Store className="h-6 w-6 text-blue-500" />
             </div>
@@ -32,7 +32,7 @@ export function Benefits() {
             </p>
           </div>
 
-          <div className="flex flex-col text-left gap-2 rounded-lg bg-card border p-12">
+          <div className="flex flex-col text-left gap-2 rounded-lg bg-card border p-6 md:p-12">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 mb-4">
               <Headphones className="h-6 w-6 text-blue-500" />
             </div>

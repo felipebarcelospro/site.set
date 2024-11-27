@@ -1,14 +1,12 @@
 import Image from 'next/image'
 import Head from 'next/head'
-import Link from 'next/link'
+
 import { GetStaticPaths, GetStaticProps } from 'next'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import { ChevronRight, Facebook, Linkedin, Link2, MessageSquare, Twitter, AtSign } from 'lucide-react'
 import { prisma } from '@/shared/utils/prisma'
 import { Button } from '@/shared/design-system/button'
-import { CTA } from '@/shared/site/components/cta'
-import { useShare, type SocialProvider } from '@/shared/site/hooks/use-share'
+import { useShare } from '@/shared/site/hooks/use-share'
+import { Markdown } from '@/shared/design-system/markdown'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/shared/design-system/breacrump'
 
 interface Post {
   title: string
@@ -27,33 +25,14 @@ export default function Post({ post }: PostProps) {
   const publishedDate = new Date(post.createdAt).toLocaleDateString('pt-BR')
   const postUrl = `https://site.set/blog/${post.slug}`
 
-  const { share, isCopied } = useShare({
+  const { shareButtons } = useShare({
     url: postUrl,
     title: post.title,
     text: post.excerpt,
     clipboardTimeout: 2000,
   })
 
-  // Mapeamento de ícones por provider
-  const providerIcons: Record<SocialProvider, React.ReactNode> = {
-    linkedin: <Linkedin className="h-4 w-4" aria-hidden="true" />,
-    facebook: <Facebook className="h-4 w-4" aria-hidden="true" />,
-    twitter: <Twitter className="h-4 w-4" aria-hidden="true" />,
-    threads: <AtSign className="h-4 w-4" aria-hidden="true" />,
-    clipboard: <Link2 className="h-4 w-4" aria-hidden="true" />,
-  }
-
-  // Cores por provider
-  const providerColors: Record<SocialProvider, string> = {
-    linkedin: 'bg-[#0077B5]',
-    facebook: 'bg-[#1877F2]',
-    twitter: 'bg-[#000000]',
-    threads: 'bg-[#101010]',
-    clipboard: 'bg-card',
-  }
-
-  const shareButtons: SocialProvider[] = ['linkedin', 'facebook', 'twitter', 'threads', 'clipboard']
-
+  
   return (
     <>
       {/* SEO */}
@@ -90,25 +69,25 @@ export default function Post({ post }: PostProps) {
       </Head>
 
       <main className="flex flex-col gap-12 pt-24">
-        <div className="container space-y-12">
+        <div className="container space-y-12 px-4 md:px-8">
           {/* Breadcrumb Navigation */}
-          <nav aria-label="Navegação">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/blog" className="hover:text-foreground">
-                  Blog
-                </Link>
-              </li>
-              <li aria-hidden="true">
-                <ChevronRight className="h-4 w-4" />
-              </li>
-              <li aria-current="page" className='text-primary font-bold'>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Site.Set</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbPage>
                 {post.title}
-              </li>
-            </ol>
-          </nav>
+              </BreadcrumbPage>
+            </BreadcrumbList>            
+          </Breadcrumb>
 
-          <div className="grid grid-cols-[1fr_300px] gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6 lg:gap-12">
             {/* Article Content */}
             <article className='bg-card border rounded-lg overflow-hidden'>
               {/* Featured Image */}
@@ -123,8 +102,8 @@ export default function Post({ post }: PostProps) {
               </figure>
 
               {/* Article Header */}
-              <header className="p-12 pb-0">
-                <h1 className="mb-6 text-balance text-4xl font-bold">
+              <header className="p-4 md:p-6 lg:p-12 pb-0">
+                <h1 className="mb-6 text-balance text-2xl md:text-3xl lg:text-4xl font-bold">
                   {post.title}
                 </h1>
 
@@ -148,56 +127,27 @@ export default function Post({ post }: PostProps) {
               </header>
 
               {/* Article Content */}
-              <div className="prose prose-invert max-w-none p-12">
-                <ReactMarkdown 
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    h1: ({ children }) => (
-                      <h2 className="mb-4 text-3xl font-bold">{children}</h2>
-                    ),
-                    h2: ({ children }) => (
-                      <h3 className="mb-4 mt-8 text-2xl font-bold">{children}</h3>
-                    ),
-                    a: ({ href, children }) => (
-                      <a href={href} className="text-blue-500 hover:underline">
-                        {children}
-                      </a>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="mb-4 list-disc pl-6">{children}</ul>
-                    ),
-                    ol: ({ children }) => (
-                      <ol className="mb-4 list-decimal pl-6">{children}</ol>
-                    ),
-                    p: ({ children }) => (
-                      <p className="mb-4 leading-relaxed text-muted-foreground">{children}</p>
-                    ),
-                  }}
-                >
-                  {post.content}
-                </ReactMarkdown>
+              <div className="prose prose-invert max-w-none p-4 md:p-6 lg:p-12">
+                <Markdown content={post.content} />
               </div>
             </article>
 
             {/* Sidebar */}
             <aside aria-label="Compartilhar post" className="space-y-6">
-              <div className="rounded-lg bg-card p-6">
+              <div className="rounded-lg bg-card p-4 md:p-6">
                 <h2 className="mb-4 text-sm font-medium">Compartilhar</h2>
                 
                 <div className="space-y-3">
                   {shareButtons.map(provider => (
                     <Button
-                      key={provider}
-                      onClick={() => share(provider)}
+                      key={provider.provider}
+                      onClick={() => provider.action()}
                       variant="outline"
                       className="w-full justify-start gap-2"
-                      aria-label={`Compartilhar no ${provider}`}
+                      aria-label={`Compartilhar no ${provider.name}`}
                     >
-                      {providerIcons[provider]}
-                      {provider === 'clipboard' 
-                        ? (isCopied ? 'Link copiado!' : 'Copiar link')
-                        : provider.charAt(0).toUpperCase() + provider.slice(1)
-                      }
+                      {provider.icon}
+                      {provider.name}
                     </Button>
                   ))}
                 </div>

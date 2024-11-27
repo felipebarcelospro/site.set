@@ -2,9 +2,13 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { cn } from '@/shared/utils/utils'
 import { Button } from '@/shared/design-system/button'
 
 export function Header() {
+  const router = useRouter()
+
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
@@ -18,13 +22,19 @@ export function Header() {
           <nav className="flex items-center gap-6">
             <Link
               href="/"
-              className="text-sm font-medium text-blue-500"
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                router.pathname === "/" ? "text-blue-500" : "text-muted-foreground"
+              )}
             >
               Home
             </Link>
             <Link
               href="/blog"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                router.pathname.startsWith("/blog") ? "text-blue-500" : "text-muted-foreground"
+              )}
             >
               Blog
             </Link>

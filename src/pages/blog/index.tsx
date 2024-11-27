@@ -1,9 +1,9 @@
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+
+import { GetServerSideProps } from 'next'
 import { Search } from '@/shared/site/components/blog/search'
 import { PostCard } from '@/shared/site/components/blog/post-card'
 import { prisma } from '@/shared/utils/prisma'
-import { CTA } from '@/shared/site/components/cta'
 
 interface Post {
   slug: string
@@ -42,15 +42,12 @@ export default function Blog({ posts, query }: BlogProps) {
       </Head>
 
       <main className="flex flex-col py-24 flex-grow h-full">
-        <header className="border-b pb-12">
+        <header className="border-b pb-8 md:pb-12">
           <div className="container space-y-6">
-            <div className="flex flex-col gap-4">
-              <span className="text-sm font-medium text-[#38BDF8]" aria-label="Seção">BLOG</span>
-              <h1 className="text-balance text-left text-4xl font-bold md:text-5xl">
-                {query 
-                  ? `Resultados para "${query}"`
-                  : 'Dicas e estratégias para impulsionar seu negócio'
-                }
+            <div className="flex flex-col gap-4 px-4 md:px-0">
+              <span className="text-sm font-medium text-[#38BDF8] text-center md:text-left" aria-label="Seção">BLOG</span>
+              <h1 className="text-balance text-center md:text-left text-3xl md:text-4xl max-w-2xl font-bold">
+                {`${query ? `Resultados para "${query}"` : 'Dicas e estratégias para impulsionar seu negócio'}`}
               </h1>
             </div>
 
@@ -58,13 +55,13 @@ export default function Blog({ posts, query }: BlogProps) {
           </div>
         </header>
 
-        <section className="container py-12" aria-label="Lista de Posts">
+        <section className="container py-8 md:py-12 px-4 md:px-8" aria-label="Lista de Posts">
           {posts.length > 0 ? (
-            <div className="grid grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {posts.map(post => (
                 <PostCard 
-                  key={post.slug} 
                   {...post} 
+                  key={post.slug} 
                   publishedAt={new Date(post.createdAt).toLocaleDateString('pt-BR')}
                   author={{
                     name: 'Felipe Barcelos',
@@ -74,7 +71,7 @@ export default function Blog({ posts, query }: BlogProps) {
               ))}
             </div>
           ) : (
-            <p className="text-center text-muted-foreground border-dashed border-2 border-border p-12 rounded-lg" role="status">
+            <p className="text-center text-muted-foreground border-dashed border-2 border-border p-8 md:p-12 rounded-lg" role="status">
               Nenhum post encontrado.
             </p>
           )}

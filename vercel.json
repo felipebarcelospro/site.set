@@ -4,5 +4,10 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "nextjs",
-  "regions": ["gru1"]
+  "regions": ["gru1"],
+  "build": {
+    "env": {
+      "PRISMA_GENERATE": "true"
+    }
+  }
 } 

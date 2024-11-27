@@ -1,13 +1,45 @@
 {
-  "name": "temp-site-set",
-  "version": "0.1.0",
+  "name": "site-set",
+  "version": "1.0.0",
   "private": true,
+  "description": "Create your affiliate store in minutes with Site.Set - The fastest way to start selling online",
+  "author": {
+    "name": "Felipe Barcelos",
+    "email": "felipebarcelospro@gmail.com",
+    "url": "https://github.com/felipebarcelospro"
+  },
+  "homepage": "https://site.set",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipebarcelospro/site.set.git"
+  },
+  "bugs": {
+    "url": "https://github.com/felipebarcelospro/site.set/issues",
+    "email": "suporte@site.set"
+  },
+  "keywords": [
+    "nextjs",
+    "react",
+    "typescript",
+    "tailwindcss",
+    "affiliate",
+    "ecommerce",
+    "store",
+    "saas"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "generate": "tsx scripts/cli.ts",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

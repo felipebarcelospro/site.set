@@ -81,22 +81,6 @@ NEXT_PUBLIC_API_KEY="chave-publica"
 
 # OpenAI
 OPENAI_API_KEY="sua-chave"
-
-# Analytics
-NEXT_PUBLIC_ANALYTICS_ID="seu-id"
-
-# Rate Limit
-RATE_LIMIT_WINDOW="60000"
-RATE_LIMIT_MAX_REQUESTS="10"
-
-# CORS
-CORS_ALLOWED_ORIGINS="http://localhost:3000"
-
-# Cache
-CACHE_MAX_AGE="31536000"
-
-# Env
-NODE_ENV="development"
 ```
 
 ## Docs
@@ -141,12 +125,6 @@ MIT - [LICENSE](LICENSE)
 3. Commit (`git commit -m 'Add xyz'`)
 4. Push (`git push origin feature/xyz`)
 5. PR
-
-## Suporte
-
-- Email: suporte@site.set
-- Twitter: [@siteset](https://twitter.com/siteset)
-- Discord: [Site.Set](https://discord.gg/siteset)
 
 ## Créditos
 

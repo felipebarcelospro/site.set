@@ -1,36 +1,34 @@
 # Site.Set
 
-Site.Set é uma plataforma que permite criar lojas de afiliados de forma rápida e intuitiva. O projeto foi desenvolvido usando Next.js e inclui um blog integrado para marketing de conteúdo.
+Plataforma para criar lojas de afiliados de forma rápida e intuitiva, desenvolvida com Next.js.
 
 ![Site.Set Preview](public/preview.png)
 
-## 🚀 Features
+## Features
 
 ### Landing Page
-- ✨ Design moderno e responsivo
-- 🎨 Tema dark por padrão
-- 📱 Totalmente responsivo
-- 🔒 Lista de espera com persistência local
-- 📊 Analytics integrado (Vercel)
-- 📈 Speed Insights para performance
+- Design moderno e responsivo
+- Tema dark por padrão
+- Lista de espera com persistência
+- Analytics integrado (Vercel)
+- Speed Insights
 
 ### Blog
-- 📝 Sistema de posts com Markdown
-- 🔍 Busca integrada
-- 🔗 Compartilhamento social
-- 📱 Layout responsivo
-- 🎯 SEO otimizado
-- 🖼️ Imagens otimizadas
+- Posts com Markdown
+- Busca integrada
+- Compartilhamento social
+- SEO otimizado
+- Imagens otimizadas
 
 ### API
-- 🔐 Autenticação via token
-- 📝 CRUD completo de posts
-- 📋 Lista de espera
-- 📚 Rate limiting
-- 🛡️ CORS configurado
-- 📚 Documentação OpenAPI
+- Auth via token
+- CRUD de posts
+- Lista de espera
+- Rate limiting
+- CORS configurado
+- Docs OpenAPI
 
-## 🛠️ Tecnologias
+## Stack
 
 - [Next.js 15](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -41,121 +39,117 @@ Site.Set é uma plataforma que permite criar lojas de afiliados de forma rápida
 - [Vercel Analytics](https://vercel.com/analytics)
 - [OpenAI](https://openai.com/)
 
-## 📦 Instalação
+## Setup
 
-\`\`\`bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/site-set.git
+```bash
+# Clone
+git clone https://github.com/felipebarcelospro/site.set.git
 
-# Entre na pasta
-cd site-set
-
-# Instale as dependências
+# Install
+cd site.set
 npm install
 
-# Configure as variáveis de ambiente
+# Config
 cp .env.sample .env
 
-# Execute as migrações do banco
+# Database
 npx prisma migrate dev
 
-# Inicie o servidor de desenvolvimento
+# Dev
 npm run dev
-\`\`\`
+```
 
-## 🔧 Comandos
+## Scripts
 
-\`\`\`bash
-# Desenvolvimento
-npm run dev          # Inicia servidor de desenvolvimento
-npm run generate     # Gera novo post via OpenAI
-npm run build        # Build do projeto
-npm run start        # Inicia servidor de produção
-npm run lint         # Executa linter
-\`\`\`
+```bash
+npm run dev      # Dev server
+npm run generate # Novo post
+npm run build    # Build
+npm run start    # Prod server
+npm run lint     # Lint
+```
 
-## 🌍 Variáveis de Ambiente
+## Env
 
-\`\`\`env
+```bash
 # Database
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/site-set"
 
-# API Auth
-API_AUTH_TOKEN="seu-token-aqui"
-NEXT_PUBLIC_API_KEY="sua-chave-publica-aqui"
+# API
+API_AUTH_TOKEN="seu-token"
+NEXT_PUBLIC_API_KEY="chave-publica"
 
 # OpenAI
-OPENAI_API_KEY="sua-chave-openai-aqui"
+OPENAI_API_KEY="sua-chave"
 
-# Analytics (opcional)
-NEXT_PUBLIC_ANALYTICS_ID="seu-id-analytics"
+# Analytics
+NEXT_PUBLIC_ANALYTICS_ID="seu-id"
 
-# Rate Limiting (opcional)
-RATE_LIMIT_WINDOW="60000"      # 1 minuto em milissegundos
-RATE_LIMIT_MAX_REQUESTS="10"   # Máximo de requisições por janela
+# Rate Limit
+RATE_LIMIT_WINDOW="60000"
+RATE_LIMIT_MAX_REQUESTS="10"
 
-# CORS (opcional)
-CORS_ALLOWED_ORIGINS="http://localhost:3000,https://seu-dominio.com"
+# CORS
+CORS_ALLOWED_ORIGINS="http://localhost:3000"
 
-# Cache Control (opcional)
-CACHE_MAX_AGE="31536000"       # 1 ano em segundos
+# Cache
+CACHE_MAX_AGE="31536000"
 
-# Environment
-NODE_ENV="development"         # development, production, ou test
-\`\`\`
+# Env
+NODE_ENV="development"
+```
 
-## 📚 Documentação
+## Docs
 
 ### API
-A documentação completa da API está disponível em:
-- [OpenAPI Specification](openapi.json)
+- [OpenAPI Spec](openapi.json)
 
 ### Guias
-- [Configurando GPT Custom](docs/gpt-setup.md)
-- [CLI de Geração de Posts](docs/cli-setup.md)
-- [Deploy na Vercel](docs/vercel-deploy.md)
+- [GPT Setup](docs/gpt-setup.md)
+- [CLI Setup](docs/cli-setup.md)
+- [Vercel Deploy](docs/vercel-deploy.md)
 
-## 🚀 Deploy
+## Deploy
 
-### Deploy na Vercel
+### Vercel
 
-1. Fork este repositório
-2. Crie uma nova conta na [Vercel](https://vercel.com)
-3. Importe o projeto do GitHub
-4. Configure as variáveis de ambiente
+1. Fork o repo
+2. Crie conta [Vercel](https://vercel.com)
+3. Importe projeto
+4. Configure env
 5. Deploy!
 
-[Guia Detalhado de Deploy](docs/vercel-deploy.md)
+[Guia Detalhado](docs/vercel-deploy.md)
 
-### Banco de Dados
+### Database
 
-1. Crie um banco PostgreSQL
-2. Configure a variável DATABASE_URL
-3. Execute as migrações:
-   \`\`\`bash
+1. Crie PostgreSQL
+2. Configure DATABASE_URL
+3. Migrations:
+   ```bash
    npx prisma migrate deploy
-   \`\`\`
+   ```
 
-## 📝 Licença
+## License
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+MIT - [LICENSE](LICENSE)
 
-## 👥 Contribuição
+## Contribuição
 
-1. Fork o projeto
-2. Crie sua feature branch (\`git checkout -b feature/AmazingFeature\`)
-3. Commit suas mudanças (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push para a branch (\`git push origin feature/AmazingFeature\`)
-5. Abra um Pull Request
+1. Fork
+2. Branch (`git checkout -b feature/xyz`)
+3. Commit (`git commit -m 'Add xyz'`)
+4. Push (`git push origin feature/xyz`)
+5. PR
 
-## 📞 Suporte
+## Suporte
 
 - Email: suporte@site.set
 - Twitter: [@siteset](https://twitter.com/siteset)
-- Discord: [Comunidade Site.Set](https://discord.gg/siteset)
+- Discord: [Site.Set](https://discord.gg/siteset)
 
-## ✨ Agradecimentos
+## Créditos
 
-- [Rocketseat](https://rocketseat.com.br/) - Pelo suporte e inspiração
-- [Vercel](https://vercel.com) - Pela incrível plataforma
-- [Shadcn](https://ui.shadcn.com/) - Pelos componentes incríveis
+- [Rocketseat](https://rocketseat.com.br/)
+- [Vercel](https://vercel.com)
+- [Shadcn](https://ui.shadcn.com/)
